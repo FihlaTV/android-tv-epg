@@ -1,9 +1,9 @@
 package se.kmdev.tvepg.epg.misc;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -18,7 +18,7 @@ import se.kmdev.tvepg.epg.domain.EPGEvent;
 public class MockDataService {
 
     private static Random rand = new Random();
-    private static List<Integer> availableEventLength = Lists.newArrayList(
+    private static List<Integer> availableEventLength = Arrays.asList(
             1000*60*15,  // 15 minutes
             1000*60*30,  // 30 minutes
             1000*60*45,  // 45 minutes
@@ -26,7 +26,7 @@ public class MockDataService {
             1000*60*120  // 120 minutes
     );
 
-    private static List<String> availableEventTitles = Lists.newArrayList(
+    private static List<String> availableEventTitles = Arrays.asList(
             "Avengers",
             "How I Met Your Mother",
             "Silicon Valley",
@@ -36,7 +36,7 @@ public class MockDataService {
             "Die Hard"
     );
 
-    private static List<String> availableChannelLogos = Lists.newArrayList(
+    private static List<String> availableChannelLogos = Arrays.asList(
             "http://kmdev.se/epg/1.png",
             "http://kmdev.se/epg/2.png",
             "http://kmdev.se/epg/3.png",
@@ -45,7 +45,7 @@ public class MockDataService {
     );
 
     public static Map<EPGChannel, List<EPGEvent>> getMockData() {
-        HashMap<EPGChannel, List<EPGEvent>> result = Maps.newLinkedHashMap();
+        HashMap<EPGChannel, List<EPGEvent>> result = new LinkedHashMap<>();
 
         long nowMillis = System.currentTimeMillis();
 
@@ -60,7 +60,7 @@ public class MockDataService {
     }
 
     private static List<EPGEvent> createEvents(EPGChannel epgChannel, long nowMillis) {
-        List<EPGEvent> result = Lists.newArrayList();
+        List<EPGEvent> result = new ArrayList<>();
 
         long epgStart = nowMillis - EPG.DAYS_BACK_MILLIS;
         long epgEnd = nowMillis + EPG.DAYS_FORWARD_MILLIS;
